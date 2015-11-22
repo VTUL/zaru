@@ -52,18 +52,20 @@ RSpec.describe Zaru do
       expect(Zaru.sanitize!(name, length: 205, padding: 5).length).to eq(200)
     end
 
+    it 'does not allow negative padding' do
+      expect { Zaru.sanitize!(name, padding: -10) }.to raise_error(ArgumentError)
+    end
+
     it 'only allows positive lengths' do
-      pending('Not yet implemented.')
-      fail
-      expect(Zaru.sanitize!(name, length: 0).length).to eq(255)
+      expect { Zaru.sanitize!(name, length: 0) }.to raise_error(ArgumentError)
 
-      expect(Zaru.sanitize!(name, length: -10).length).to eq(255)
+      expect { Zaru.sanitize!(name, length: -10) }.to raise_error(ArgumentError)
 
-      expect(Zaru.sanitize!(name, length: 10, padding: 10).length).to eq(255)
+      expect { Zaru.sanitize!(name, length: 10, padding: 10) }.to raise_error(ArgumentError)
 
-      expect(Zaru.sanitize!(name, length: 5, padding: 10).length).to eq(255)
+      expect { Zaru.sanitize!(name, length: 5, padding: 10) }.to raise_error(ArgumentError)
 
-      expect(Zaru.sanitize!(name, length: -10, padding: 10).length).to eq(255)
+      expect { Zaru.sanitize!(name, length: -10, padding: 10) }.to raise_error(ArgumentError)
     end
   end
 

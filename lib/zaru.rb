@@ -14,6 +14,16 @@ class Zaru
     @whitespace = options[:whitespace] || ' '
     @replacement_char = options[:replace] || ''
     @raw = filename.to_s.freeze
+
+    if @length <= 0
+      raise ArgumentError.new("Length (#{@length}) must be greater than zero.")
+    end
+    if @padding < 0
+      raise ArgumentError.new("Padding (#{@padding}) must not be negative.")
+    end
+    if (@length - @padding) <= 0
+      raise ArgumentError.new("Length (#{@length}) must be greater than padding (#{@padding}).")
+    end
   end
 
   # strip whitespace on beginning and end
