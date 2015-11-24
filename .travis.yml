@@ -3,12 +3,10 @@ language: ruby
 bundle_args: --binstubs
 rvm:
   - jruby-19mode
-  - jruby-head
   - rbx
   - 1.9.2
   - 1.9.3
   - 2.0.0
   - 2.1
   - 2.2
-  - ruby-head
 script: bundle exec rspec spec
