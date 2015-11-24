@@ -92,6 +92,12 @@ RSpec.describe Zaru do
       end
     end
 
+    it 'changes ampersands to "and" surrounded by the replacement_char' do
+      expect(Zaru.sanitize!('this&that')).to eq('thisandthat')
+
+      expect(Zaru.sanitize!('this&that', replace: '_')).to eq('this_and_that')
+    end
+
     it 'replaces blacklisted characters with the replacement param' do
       bad_chars.each do |char|
         expect(Zaru.sanitize!("a#{char}", replace: '_')).to eq('a_')

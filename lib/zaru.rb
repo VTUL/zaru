@@ -61,6 +61,7 @@ class Zaru
 
     def filter(filename)
       filename = filter_characters(filename)
+      filename = filter_and(filename)
       filename = filter_windows_reserved_names(filename)
       filename = filter_blank(filename)
       filename = filter_start(filename)
@@ -68,6 +69,10 @@ class Zaru
 
     def filter_characters(filename)
       filename.gsub(CHARACTER_FILTER, @replacement_char)
+    end
+
+    def filter_and(filename)
+      filename.gsub(/&/u, @replacement_char + 'and' + @replacement_char)
     end
 
     def filter_windows_reserved_names(filename)
